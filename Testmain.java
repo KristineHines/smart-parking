@@ -1,18 +1,14 @@
-import java.util.List;
+import parking.ParkingManager;
+
 import java.util.Scanner;
 
 public class Testmain {
     public static void main(String[] args) {
-        ParkingLot parkingLot = new ParkingLot(10);
-        BasicParkingStrategy strategy = new BasicParkingStrategy(parkingLot.getAllSpaces());
-        ReservationManager reservationManager = new ReservationManager();
-        PaymentManager paymentManager = new PaymentManager();
-        NotificationManager notificationManager = new NotificationManager();
-        MaintenanceManager maintenanceManager = new MaintenanceManager();
-        IntegrationManager integrationManager = new IntegrationManager();
-        EnvironmentalSensor environmentalSensor = new EnvironmentalSensor();
+        ParkingManager parkingManager = new ParkingManager(10);
+
         Scanner objscn = new Scanner(System.in);
 
+        // TODO: "power down" sensor if the user is idle.
         while (true) {
             System.out.println("\nSmart Parking System");
             System.out.println("1. View Available Parking Spaces");
@@ -27,7 +23,7 @@ public class Testmain {
             switch (choice) {
                 case 1:
                     System.out.println("Available Spaces:");
-                    parkingLot.getAvailableSpaces().forEach(space -> System.out.println(space.getId()));
+                    parkingManager.getAvailableSpaces().forEach(space -> System.out.println(space.getId()));
                     break;
 
                     case 2:
@@ -35,36 +31,19 @@ public class Testmain {
                         String licensePlate = objscn.next();
                         System.out.println("Enter your vehicle type (e.g. car, motorcycle, truck): ");
                         String vehicleType = objscn.next();
-                        Vehicle vehicle = new Vehicle(licensePlate, vehicleType);
-                        ParkingSpace space = strategy.findAvailableParking();
-                        if (space != null && reservationManager.reserveSpace(vehicle.getLicensePlate(), space)) {
-                            System.out.println("Space reserved: " + space.getId());
-                            paymentManager.processPayment(vehicle.getLicensePlate(), 10.0); // Example payment
-                            notificationManager.sendNotification("Reservation confirmed for " + vehicle.getVehicleType() +
-                                    " with license plate number " + vehicle.getLicensePlate());
-                        } else {
-                            System.out.println("No available spaces or reservation failed.");
-                        }
+                        parkingManager.reserveParkingSpace(licensePlate, vehicleType);
                         break;
 
                     case 3:
-                        System.out.println("Temperature: " + environmentalSensor.getTemperature() + " °C");
-                        System.out.println("Humidity: " + environmentalSensor.getHumidity() + "%");
-                        System.out.println("Air Quality: " + environmentalSensor.getAirQuality());
+                        parkingManager.getEnvironmentalInformation();
                         break;
 
                     case 4:
-                        List<String> reservedVehicles = reservationManager.getReservedVehicles();
-                        if (reservedVehicles.isEmpty()) {
-                            System.out.println("The parking lot is empty.");
-                        } else {
-                            System.out.println("Vehicles currently reserving parking spaces:");
-                            reservedVehicles.forEach(System.out::println);
-                        }
+                        parkingManager.getReservedVehicles();
                         break;
 
                     case 5:
-                        maintenanceManager.performMaintenance();
+                        parkingManager.performMaintenance();
                         break;
 
                     case 6:
@@ -72,8 +51,8 @@ public class Testmain {
                         objscn.close();
                         return;
 
-                        default:
-                            System.out.println("Invalid option.");
+                    default:
+                        System.out.println("Invalid option.");
             }
         }
     }
