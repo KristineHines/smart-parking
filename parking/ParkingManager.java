@@ -55,12 +55,18 @@ public class ParkingManager {
         System.out.println("Currently using the " + "--" + "strategy and the " + "--" + " sensor.");
     }
 
+    // ---- Parking Spaces ----
     public List<ParkingSpace> getAvailableSpaces() {
         return parkingLot.getAvailableSpaces();
     }
 
     public List<ParkingSpace> getAllSpaces() {
         return this.parkingLot.getAllSpaces();
+    }
+
+    // ---- Reservations ----
+    public void getReservedVehicles() {
+        this.reservationManager.getReservedVehicles();
     }
 
     public void reserveParkingSpace(String licensePlate, String vehicleType) {
@@ -76,14 +82,12 @@ public class ParkingManager {
         }
     }
 
+    // ---- Environmental ----
     public void getEnvironmentalInformation() {
         this.environmentalSensor.getEnvironmentalInformation();
     }
 
-    public void getReservedVehicles() {
-        this.reservationManager.getReservedVehicles();
-    }
-
+    // ---- Maintenance ----
     public void performMaintenance() {
         this.maintenanceManager.performMaintenance();
     }

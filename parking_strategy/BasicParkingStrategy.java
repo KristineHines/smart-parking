@@ -11,7 +11,7 @@ public class BasicParkingStrategy extends ParkingStrategy {
     }
 
     public ParkingSpace findAvailableParking() {
-        for (ParkingSpace space : parkingLot.getAvailableSpaces()) {
+        for (ParkingSpace space : this.parkingLot.getAvailableSpaces()) {
             if (!space.isOccupied()) {
                 return space;
             }
