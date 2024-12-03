@@ -1,5 +1,7 @@
 package sensors;
 
+import parking.ParkingLot;
+
 public class CameraSensor implements ParkingSensor {
     private boolean isOn = false;
     private boolean isOff = true;

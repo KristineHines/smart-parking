@@ -14,10 +14,14 @@ import java.util.Random;
 public class ParkingManager {
     private PaymentManager paymentManager;
     private ParkingStrategy parkingStrategy;
+
+    public ReservationManager getReservationManager() {
+        return reservationManager;
+    }
+
     private ReservationManager reservationManager;
     private NotificationManager notificationManager;
     private EnvironmentalSensor environmentalSensor;
-    private ParkingSensor sensor;
     private ParkingLot parkingLot;
     private MaintenanceManager maintenanceManager;
     private IntegrationManager integrationManager;
@@ -39,20 +43,7 @@ public class ParkingManager {
         this.maintenanceManager = new MaintenanceManager();
         this.integrationManager = new IntegrationManager();
 
-        // Choose sensor
-        Random random = new Random();
-        boolean randomBoolean = random.nextBoolean();
-        ParkingSensor sensor;
-        if (randomBoolean) {
-            sensor = new UltrasonicSensor();
-        } else {
-            sensor = new CameraSensor();
-        }
         this.parkingStrategy = parkingStrategy;
-        this.sensor = sensor;
-
-        // TODO: need to string for sensor and strategy
-        System.out.println("Currently using the " + "--" + "strategy and the " + "--" + " sensor.");
     }
 
     // ---- Parking Spaces ----

@@ -1,12 +1,16 @@
 package parking;
 
-public class ParkingSpace {
-    private String id;
-    private boolean isOccupied;
+import sensors.ParkingSensor;
 
-    public ParkingSpace(String id) {
+public class ParkingSpace {
+    private final String id;
+    private boolean isOccupied;
+    private final ParkingSensor parkingSensor;
+
+    public ParkingSpace(String id, ParkingSensor parkingSensor) {
         this.id = id;
         this.isOccupied = false;
+        this.parkingSensor = parkingSensor;
     }
 
     public String getId() {
@@ -19,5 +23,10 @@ public class ParkingSpace {
 
     public void setOccupied(boolean occupied) {
         this.isOccupied = occupied;
+    }
+
+
+    public ParkingSensor getParkingSensor() {
+        return parkingSensor;
     }
 }

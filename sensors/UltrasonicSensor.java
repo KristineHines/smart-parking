@@ -1,54 +1,53 @@
 package sensors;
 
+import java.util.Random;
+
 public class UltrasonicSensor implements ParkingSensor {
     // TODO: enum or constant?
-    private static int DISTANCE_THRESHOLD;
+    private static final int DISTANCE_THRESHOLD = 3;
+    private static final String OCCUPIED = "Occupied";
+    private static final String VACANT = "Vacant";
+    private boolean isOn;
 
     public UltrasonicSensor() {
-        System.out.println("Initializing the UltrasonicSensor");
-        System.out.println("1. Pin configurations.");
-        System.out.println("2. Operating Mode.");
-        System.out.println("3. Taking into account the current environment.");
-        System.out.println("Sensor Initialized!");
+        this.isOn = true;
         setup();
     }
 
     // TODO
     private void setup() {
-        System.out.println("Configuring the UltrasonicSensor");
-        System.out.println("1. Communication Protocols.");
-        System.out.println("2. Calibrating");
+        System.out.println("-- Initializing the UltrasonicSensor");
+        System.out.println("   1. Pin configurations.");
+        System.out.println("   2. Operating Mode.");
+        System.out.println("   3. Taking into account the current environment.");
+        System.out.println("Sensor Initialized!");
+        System.out.println();
+        System.out.println("-- Configuring the UltrasonicSensor");
+        System.out.println("   1. Communication Protocols.");
+        System.out.println("   2. Calibrating");
         System.out.println("Sensor is Setup!");
     }
 
-    // TODO
     public boolean detectVehicle() {
-        return Math.random() < 0.5;
+        Random random = new Random();
+        return random.nextInt(15) < getDistanceThreshold();
     }
 
-    // TODO
     public String getParkingStatus() {
-        return detectVehicle() ? "Occupied" : "Vacant";
+        return detectVehicle() ? OCCUPIED : VACANT;
     }
 
-    // TODO
-    private int measureDistance() {
-        return 0;
-    }
-
-    // TODO
     private int getDistanceThreshold() {
         return DISTANCE_THRESHOLD;
     }
 
-    // TODO
     public boolean isOccupied() {
-        return false;
+        return getParkingStatus().equals(OCCUPIED);
     }
 
     // TODO
     public boolean isVacant() {
-        return false;
+        return getParkingStatus().equals(VACANT);
     }
 
     // TODO
@@ -58,21 +57,25 @@ public class UltrasonicSensor implements ParkingSensor {
 
     // TODO
     private void reset() {
-
+        powerOff();
+        powerOn();
+        setup();
     }
 
     // TODO
     private void enableInterrupt() {
-
+        reset();
     }
 
     // TODO
     private void powerOn() {
-
+        this.isOn = true;
+        System.out.println("Sensor is powered on");
     }
 
     // TODO
     private void powerOff() {
-
+        this.isOn = false;
+        System.out.println("Sensor is powered off");
     }
 }
