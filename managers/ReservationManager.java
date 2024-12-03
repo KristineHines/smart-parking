@@ -30,6 +30,7 @@ public class ReservationManager {
             }
         }
     }
+
     public void cancelReservedVehicles(String licensePlate, ParkingSpace space) {
         Set<String> reservedVehicles = this.licensePlateToReservedSpace.keySet();
         if (reservedVehicles.isEmpty()) {
@@ -37,12 +38,7 @@ public class ReservationManager {
         } else {
             System.out.println("Removed license plate " + licensePlate + " from " + space.getId());
             space.setOccupied(false);
+            this.licensePlateToReservedSpace.remove(licensePlate);
         }
-    }
-
-    public boolean clearSpace(String licensePlate, ParkingSpace space) {
-        this.licensePlateToReservedSpace.remove(licensePlate);
-        space.setOccupied(false);
-        return false;
     }
 }

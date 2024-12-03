@@ -36,19 +36,18 @@ public class Testmain {
                     parkingManager.reserveParkingSpace(licensePlate, vehicleType);
                     break;
                 }
-
-                case 3:
+                case 3: {
                     parkingManager.getEnvironmentalInformation();
                     break;
-
-                case 4:
+                }
+                case 4: {
                     parkingManager.getReservedVehicles();
                     break;
-
-                case 5:
+                }
+                case 5: {
                     parkingManager.performMaintenance();
                     break;
-
+                }
                 case 6: {
                     System.out.println("Enter your vehicle license plate: ");
                     String licensePlate = objscn.next();
@@ -66,14 +65,14 @@ public class Testmain {
 
                     break;
                 }
-
-                case 7:
+                case 7: {
                     System.out.println("Exiting...");
                     objscn.close();
                     return;
-
-                default:
+                }
+                default: {
                     System.out.println("Invalid option.");
+                }
             }
         }
     }

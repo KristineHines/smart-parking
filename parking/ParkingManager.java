@@ -3,13 +3,9 @@ package parking;
 import managers.*;
 import parking_strategy.BasicParkingStrategy;
 import parking_strategy.ParkingStrategy;
-import sensors.CameraSensor;
 import sensors.EnvironmentalSensor;
-import sensors.ParkingSensor;
-import sensors.UltrasonicSensor;
 
 import java.util.List;
-import java.util.Random;
 
 public class ParkingManager {
     private PaymentManager paymentManager;
