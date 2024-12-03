@@ -2,19 +2,16 @@ package parking;
 
 import managers.*;
 import parking_strategy.BasicParkingStrategy;
+import parking_strategy.DynamicParkingStrategy;
 import parking_strategy.ParkingStrategy;
 import sensors.EnvironmentalSensor;
 
 import java.util.List;
+import java.util.Random;
 
 public class ParkingManager {
     private PaymentManager paymentManager;
     private ParkingStrategy parkingStrategy;
-
-    public ReservationManager getReservationManager() {
-        return reservationManager;
-    }
-
     private ReservationManager reservationManager;
     private NotificationManager notificationManager;
     private EnvironmentalSensor environmentalSensor;
@@ -26,8 +23,9 @@ public class ParkingManager {
     public ParkingManager(int totalSpaces) {
         this.parkingLot = new ParkingLot(totalSpaces);
 
-        // TODO need to make random if we get a dynamic parking strategy
-        BasicParkingStrategy parkingStrategy = new BasicParkingStrategy(this.parkingLot);
+        Random random = new Random();
+        this.parkingStrategy = random.nextBoolean() ?
+                new BasicParkingStrategy(this.parkingLot, totalSpaces) : new DynamicParkingStrategy(this.parkingLot, totalSpaces);
 
         // initialize other classes/managers
         this.reservationManager = new ReservationManager();
@@ -38,8 +36,6 @@ public class ParkingManager {
         // Not sure we want these
         this.maintenanceManager = new MaintenanceManager();
         this.integrationManager = new IntegrationManager();
-
-        this.parkingStrategy = parkingStrategy;
     }
 
     // ---- Parking Spaces ----
@@ -52,6 +48,10 @@ public class ParkingManager {
     }
 
     // ---- Reservations ----
+    public ReservationManager getReservationManager() {
+        return reservationManager;
+    }
+
     public void getReservedVehicles() {
         this.reservationManager.getReservedVehicles();
     }
@@ -77,5 +77,9 @@ public class ParkingManager {
     // ---- Maintenance ----
     public void performMaintenance() {
         this.maintenanceManager.performMaintenance();
+    }
+
+    public ParkingStrategy getParkingStrategy() {
+        return parkingStrategy;
     }
 }

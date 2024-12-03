@@ -10,9 +10,9 @@ public class ReservationManager {
     private final Map<String, ParkingSpace> licensePlateToReservedSpace = new HashMap<>();
 
     public boolean reserveSpace(String licensePlate, ParkingSpace space) {
-        if (space.isOccupied()) return false;
+        if (space.isReserved()) return false;
         this.licensePlateToReservedSpace.put(licensePlate, space);
-        space.setOccupied(true);
+        space.setReserved(true);
         return true;
     }
 
@@ -37,7 +37,7 @@ public class ReservationManager {
             System.out.println("This car is not in this space, or is not reserved");
         } else {
             System.out.println("Removed license plate " + licensePlate + " from " + space.getId());
-            space.setOccupied(false);
+            space.setReserved(false);
             this.licensePlateToReservedSpace.remove(licensePlate);
         }
     }

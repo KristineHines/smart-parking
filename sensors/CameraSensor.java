@@ -2,34 +2,48 @@ package sensors;
 
 import parking.ParkingLot;
 
+import java.util.Random;
+
 public class CameraSensor implements ParkingSensor {
+    private final String OCCUPIED = "Occupied";
+    private final String VACANT = "Vacant";
     private boolean isOn = false;
-    private boolean isOff = true;
+    private int resolution;
+    private int framerate;
+    private String contrast;
+    private String brightness;
+    private String sharpness;
 
     public CameraSensor() {
+        this.isOn = true;
         System.out.println("Initializing the Camera Sensor");
         System.out.println("1. Resolution.");
         System.out.println("2. Framerate.");
         System.out.println("Sensor Initialized!");
-//        setup();
+        setup();
     }
 
-//    private void setup() {
-//
-//    }
+    private void setup() {
+        setFramerate(30);
+        setResolution(1920, 1080);
+        adjustImageProcessingParameters( "High", "Medium", "Low");
+    }
 
+    private void setFramerate(int framerate) {
+        this.framerate = framerate;
+    }
 
-    // TODO
     public boolean detectVehicle() {
-        return true; // Simplified
+        captureImage();
+        processImage();
+        Random random = new Random();
+        return random.nextBoolean();
     }
 
-    // TODO
     public String getParkingStatus() {
-        return "Processing Image - parking.Vehicle detected";
+        return detectVehicle() ? OCCUPIED : VACANT;
     }
 
-    // TODO
     private void captureImage() {
         System.out.println("image captured");
     }
@@ -40,19 +54,22 @@ public class CameraSensor implements ParkingSensor {
         System.out.println("image processed");
     }
 
-    // TODO
     public void getOccupancyStatus() {
-        System.out.println("Occupancy Status");
+        if (getParkingStatus().equals(OCCUPIED)) {
+            System.out.print("Occupied");
+        } else {
+            System.out.print("Vacant");
+        }
     }
 
-    // TODO
     private void setResolution(int width, int height) {
-        System.out.println("Setting resolution to " + width + "x" + height);
+        this.resolution = width * height;
     }
 
-    // TODO needs params
-    private void adjustImageProcessingParameters() {
-        System.out.println("Adjusting image processing parameters");
+    private void adjustImageProcessingParameters(String contrast, String brightness, String sharpness) {
+        this.contrast = contrast;
+        this.brightness = brightness;
+        this.sharpness = sharpness;
     }
 
     // TODO
@@ -63,15 +80,50 @@ public class CameraSensor implements ParkingSensor {
     // TODO
     public void reset() {
         System.out.println("Resetting");
+        powerOff();
+        powerOn();
+        setup();
     }
 
-    // TODO
     public void powerOn() {
+        this.isOn = true;
         System.out.println("Power on");
     }
 
-    // TODO
     public void powerOff() {
+        this.isOn = false;
         System.out.println("Power off");
+    }
+
+    public int getResolution() {
+        return resolution;
+    }
+
+    public int getFramerate() {
+        return framerate;
+    }
+
+    public String getContrast() {
+        return contrast;
+    }
+
+    public void setContrast(String contrast) {
+        this.contrast = contrast;
+    }
+
+    public String getBrightness() {
+        return brightness;
+    }
+
+    public void setBrightness(String brightness) {
+        this.brightness = brightness;
+    }
+
+    public String getSharpness() {
+        return sharpness;
+    }
+
+    public void setSharpness(String sharpness) {
+        this.sharpness = sharpness;
     }
 }

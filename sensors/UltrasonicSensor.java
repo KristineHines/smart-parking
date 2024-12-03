@@ -3,7 +3,6 @@ package sensors;
 import java.util.Random;
 
 public class UltrasonicSensor implements ParkingSensor {
-    // TODO: enum or constant?
     private static final int DISTANCE_THRESHOLD = 3;
     private static final String OCCUPIED = "Occupied";
     private static final String VACANT = "Vacant";
@@ -14,7 +13,6 @@ public class UltrasonicSensor implements ParkingSensor {
         setup();
     }
 
-    // TODO
     private void setup() {
         System.out.println("-- Initializing the UltrasonicSensor");
         System.out.println("   1. Pin configurations.");
@@ -55,25 +53,21 @@ public class UltrasonicSensor implements ParkingSensor {
 
     }
 
-    // TODO
     private void reset() {
         powerOff();
         powerOn();
         setup();
     }
 
-    // TODO
     private void enableInterrupt() {
         reset();
     }
 
-    // TODO
     private void powerOn() {
         this.isOn = true;
         System.out.println("Sensor is powered on");
     }
 
-    // TODO
     private void powerOff() {
         this.isOn = false;
         System.out.println("Sensor is powered off");

@@ -9,8 +9,10 @@ public class Testmain {
 
         Scanner objscn = new Scanner(System.in);
 
-        // TODO: "power down" sensor if the user is idle.
         while (true) {
+            // optimize parking before user is prompted everytime
+            parkingManager.getParkingStrategy().optimizeParking();
+
             System.out.println("\nSmart Parking System");
             System.out.println("1. View Available Parking Spaces");
             System.out.println("2. Reserve a Parking Space");
