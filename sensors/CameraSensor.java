@@ -48,9 +48,7 @@ public class CameraSensor implements ParkingSensor {
         System.out.println("image captured");
     }
 
-    // TODO
     private void processImage() {
-        // TODO print license plates
         System.out.println("image processed");
     }
 
@@ -72,12 +70,10 @@ public class CameraSensor implements ParkingSensor {
         this.sharpness = sharpness;
     }
 
-    // TODO
     public void getSensorInfo() {
         System.out.println("Sensor Info");
     }
 
-    // TODO
     public void reset() {
         System.out.println("Resetting");
         powerOff();

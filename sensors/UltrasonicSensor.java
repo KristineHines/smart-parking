@@ -43,12 +43,10 @@ public class UltrasonicSensor implements ParkingSensor {
         return getParkingStatus().equals(OCCUPIED);
     }
 
-    // TODO
     public boolean isVacant() {
         return getParkingStatus().equals(VACANT);
     }
 
-    // TODO
     public void getSensorInfo() {
 
     }

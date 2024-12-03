@@ -9,7 +9,6 @@ public class ParkingSpace {
     private boolean isOccupied;
     private boolean isReserved;
     private LocalDateTime reservationExpiryTime;
-    // TODO: location
     private final ParkingSensor parkingSensor;
 
     public ParkingSpace(String id, ParkingSensor parkingSensor) {

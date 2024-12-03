@@ -22,7 +22,7 @@ public class ReservationManager {
 
     public void getReservedVehicles() {
         if (this.licensePlateToReservedSpace.isEmpty()) {
-            System.out.println("The parking lot is empty.");
+            System.out.println("No spaces have been reserved.");
         } else {
             System.out.println("Reservations:");
             for (Map.Entry<String, ParkingSpace> entry : this.licensePlateToReservedSpace.entrySet()) {
