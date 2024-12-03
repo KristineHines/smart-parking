@@ -20,10 +20,12 @@ public class ParkingLot {
     public ParkingLot(int totalSpaces) {
         this.parkingSpaces = new ArrayList<>();
         this.totalSpaces = totalSpaces;
+        UltrasonicSensor ultrasonicSensor = new UltrasonicSensor();
+        CameraSensor cameraSensor = new CameraSensor();
 
         // Use ultrasonic for half of the spaces and camera for the other half
         for (int i = 1; i <= totalSpaces; i++) {
-            ParkingSensor sensor = i % 2 == 0 ? new UltrasonicSensor() : new CameraSensor();
+            ParkingSensor sensor = i % 2 == 0 ? ultrasonicSensor : cameraSensor;
             this.parkingSpaces.add(new ParkingSpace("Space " + i, sensor));
         }
     }

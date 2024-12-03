@@ -1,6 +1,7 @@
 package parking;
 
-import java.time.*;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class Vehicle {
     private String licensePlate;

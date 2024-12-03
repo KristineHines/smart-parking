@@ -1,7 +1,5 @@
 package sensors;
 
-import parking.ParkingLot;
-
 import java.util.Random;
 
 public class CameraSensor implements ParkingSensor {
@@ -16,9 +14,9 @@ public class CameraSensor implements ParkingSensor {
 
     public CameraSensor() {
         this.isOn = true;
-        System.out.println("Initializing the Camera Sensor");
-        System.out.println("1. Resolution.");
-        System.out.println("2. Framerate.");
+        System.out.println("-- Initializing the Camera Sensor");
+        System.out.println("   1. Resolution.");
+        System.out.println("   2. Framerate.");
         System.out.println("Sensor Initialized!");
         setup();
     }

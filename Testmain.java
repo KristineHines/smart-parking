@@ -6,13 +6,11 @@ import java.util.Scanner;
 public class Testmain {
     public static void main(String[] args) {
         ParkingManager parkingManager = new ParkingManager(10);
+        parkingManager.getParkingStrategy().optimizeParking();
 
         Scanner objscn = new Scanner(System.in);
 
         while (true) {
-            // optimize parking before user is prompted everytime
-            parkingManager.getParkingStrategy().optimizeParking();
-
             System.out.println("\nSmart Parking System");
             System.out.println("1. View Available Parking Spaces");
             System.out.println("2. Reserve a Parking Space");
